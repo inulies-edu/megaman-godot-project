@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Misc/Camera.gd" type="Script" id=1]
+
+[node name="Camera" type="Node2D"]
+position = Vector2( 2, 5 )
+script = ExtResource( 1 )
+
+[node name="Main" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.74, 0.74 )
+process_mode = 0
+limit_left = -170
+limit_bottom = 240
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.04
+drag_margin_top = 0.0
+drag_margin_right = 0.04
+drag_margin_bottom = 0.15
+editor_draw_limits = true
+editor_draw_drag_margin = true

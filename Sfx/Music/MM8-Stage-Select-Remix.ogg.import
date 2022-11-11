@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/MM8-Stage-Select-Remix.ogg-6777c7480e019a274c2c09349c73e9fa.oggstr"
+
+[deps]
+
+source_file="res://Sfx/Music/MM8-Stage-Select-Remix.ogg"
+dest_files=[ "res://.import/MM8-Stage-Select-Remix.ogg-6777c7480e019a274c2c09349c73e9fa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

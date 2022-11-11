@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bunby_shoot.wav-91e5961548bd1a4ecaeb33aa812e89ac.sample"
+
+[deps]
+
+source_file="res://Sfx/Common Sounds/bunby_shoot.wav"
+dest_files=[ "res://.import/bunby_shoot.wav-91e5961548bd1a4ecaeb33aa812e89ac.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,70 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Sfx/Player/Jump_004.wav" type="AudioStream" id=1]
+[ext_resource path="res://Scripts/Player/Sfx.gd" type="Script" id=2]
+[ext_resource path="res://Sfx/Player/feet_38.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sfx/Player/tele_086.wav" type="AudioStream" id=4]
+[ext_resource path="res://Sfx/Common Sounds/megaman_pain.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sfx/Common Sounds/megaman_death.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sfx/Player/slide.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sfx/Player/bustershot.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sfx/Player/chargeshot_full.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sfx/Player/chargeshot.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sfx/Player/charge.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sfx/UI/megaman_astrocrush.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sfx/Common Sounds/Overload.ogg" type="AudioStream" id=16]
+[ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player.gd" type="Script" id=19]
+
+[node name="PlayerSfx" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Shoot1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -11.0
+
+[node name="Shoot2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
+
+[node name="Shoot3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+script = ExtResource( 19 )
+samples = [ ExtResource( 5 ) ]
+random_volume_range = 0
+random_pitch_range = 0
+
+[node name="Die" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+
+[node name="AstroCrush" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -5.0
+
+[node name="Charge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -10.0
+pitch_scale = 0.7
+
+[node name="Overload" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -15.0
+
+[node name="Land" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Intro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="Slide" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -15.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -20.0

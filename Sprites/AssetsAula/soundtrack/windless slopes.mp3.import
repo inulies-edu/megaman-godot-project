@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/windless slopes.mp3-6aaf25a4f7b09ea9dee7b1f271681f7a.mp3str"
+
+[deps]
+
+source_file="res://Sprites/AssetsAula/soundtrack/windless slopes.mp3"
+dest_files=[ "res://.import/windless slopes.mp3-6aaf25a4f7b09ea9dee7b1f271681f7a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

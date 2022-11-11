@@ -1,0 +1,443 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://Animation/Player/Shoot/Base.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Animation/Player/Normal/Base.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scripts/Player/PlayerFinal.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Player/Animate.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/Effects/Explosion/explosion-2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Transform/2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Transform/1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Transform/0.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Transform/3.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Effects/Line1.png" type="Texture" id=93]
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform float flash_modifier : hint_range(0.0, 1.0) = 1;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier );
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+shader_param/flash_color = Color( 0.505882, 0.305882, 0.305882, 0 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="Shader" id=23]
+code = "shader_type canvas_item;
+
+uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform float flash_modifier : hint_range(0.0, 1.0) = 1;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier );
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = SubResource( 23 )
+shader_param/flash_color = Color( 1, 0, 0, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="SpriteFrames" id=34]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Base",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Blue",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Red",
+"speed": 10.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Gradient" id=20]
+offsets = PoolRealArray( 0, 0.206452, 0.795775, 1 )
+colors = PoolColorArray( 0.364706, 0.372549, 0, 0, 0.160027, 0.630042, 0.819336, 1, 1, 1, 1, 1, 0.996078, 1, 0.894118, 0 )
+
+[sub_resource type="GradientTexture" id=21]
+gradient = SubResource( 20 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=22]
+emission_shape = 5
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 20.0
+emission_ring_height = 1.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_align_y = true
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = -200.0
+color_ramp = SubResource( 21 )
+
+[sub_resource type="CanvasItemMaterial" id=32]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="ParticlesMaterial" id=33]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0, 1, 0.94902, 1 )
+anim_speed = 8.0
+
+[sub_resource type="Animation" id=28]
+resource_name = "Alert"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Shoot:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.271, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animation/Shoot:material:shader_param/flash_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Charge_1"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Normal:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animation/Normal:material:shader_param/flash_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "None"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Normal:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Normal:material:shader_param/white_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animation/Normal:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Animation/Normal:material:shader_param/flash_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Animation/Shoot:material:shader_param/flash_modifier")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Animation/Shoot:material:shader_param/flash_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Super_charge"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Normal:material:shader_param/flash_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.992157, 0.215686, 0.156863, 1 ), Color( 0.992157, 0.215686, 0.156863, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animation/Normal:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "Hit"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Normal:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4, 0.5, 0.6, 0.601, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.219608 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.219608 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.219608 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.219608 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.219608 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "None"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Shoot:material:shader_param/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=31]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Shoot:material:shader_param/flash_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animation/Shoot:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Animation/Normal:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 7.69231, 13.1539 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16.923, 8.58029 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 8.46154, 13.5385 )
+
+[node name="Megaman" type="KinematicBody2D" groups=["Player"]]
+script = ExtResource( 3 )
+
+[node name="Animation" type="Node2D" parent="."]
+position = Vector2( 0, -0.769231 )
+script = ExtResource( 4 )
+
+[node name="Normal" type="AnimatedSprite" parent="Animation"]
+material = SubResource( 10 )
+position = Vector2( 0, -5 )
+frames = ExtResource( 2 )
+animation = "Idle"
+
+[node name="Shoot" type="AnimatedSprite" parent="Animation"]
+visible = false
+material = SubResource( 24 )
+position = Vector2( -1, -5 )
+frames = ExtResource( 1 )
+animation = "Slide"
+
+[node name="Transform" type="AnimatedSprite" parent="Animation"]
+frames = SubResource( 34 )
+
+[node name="ChargeEffect" type="Particles2D" parent="Animation"]
+position = Vector2( 0, -2.53846 )
+emitting = false
+amount = 25
+lifetime = 0.4
+process_material = SubResource( 22 )
+texture = ExtResource( 93 )
+
+[node name="DeadEffect" type="Particles2D" parent="Animation"]
+modulate = Color( 1, 1, 1, 0.556863 )
+material = SubResource( 32 )
+emitting = false
+amount = 30
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 33 )
+texture = ExtResource( 5 )
+
+[node name="Charge" type="AnimationPlayer" parent="Animation"]
+root_node = NodePath("../..")
+reset_on_save = false
+playback_speed = 6.0
+anims/Alert = SubResource( 28 )
+anims/Charge_1 = SubResource( 11 )
+anims/None = SubResource( 13 )
+anims/RESET = SubResource( 12 )
+anims/Super_charge = SubResource( 15 )
+
+[node name="Hit" type="AnimationPlayer" parent="Animation"]
+root_node = NodePath("../..")
+playback_speed = 6.0
+anims/Hit = SubResource( 29 )
+anims/None = SubResource( 30 )
+anims/RESET = SubResource( 31 )
+
+[node name="BaseColision" type="CollisionShape2D" parent="."]
+position = Vector2( 1.83399e-07, -1.15387 )
+shape = SubResource( 3 )
+
+[node name="DashCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3.878 )
+shape = SubResource( 5 )
+disabled = true
+
+[node name="FloorCast" type="RayCast2D" parent="."]
+position = Vector2( 0, -7.15387 )
+enabled = true
+cast_to = Vector2( 0, 22.1539 )
+
+[node name="ChargeTimer" type="Timer" parent="."]
+wait_time = 1.1
+one_shot = true
+
+[node name="Charged1" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Player"]]
+position = Vector2( 0, -5.38466 )
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox" groups=["Player"]]
+position = Vector2( 0, 4.3 )
+shape = SubResource( 6 )
+
+[node name="ScreenDetector" type="VisibilityNotifier2D" parent="."]
+visible = false
+
+[connection signal="animation_finished" from="Animation/Transform" to="." method="_on_Transform_animation_finished"]
+[connection signal="animation_finished" from="Animation/Hit" to="." method="_on_Hit_animation_finished"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]
+[connection signal="timeout" from="Charged1" to="." method="_on_Charged1_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="screen_entered" from="ScreenDetector" to="." method="_on_VisibilityNotifier2D_screen_entered"]
